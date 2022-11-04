@@ -1,6 +1,6 @@
-import Axios from 'axios';
+import Axios, { AxiosInstance } from 'axios';
 
-export const client = Axios.create({
+export const client: AxiosInstance = Axios.create({
     baseURL: 'https://jsonplaceholder.typicode.com/',
     timeout: 30000,
   });
