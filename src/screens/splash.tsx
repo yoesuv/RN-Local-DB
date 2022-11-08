@@ -20,11 +20,9 @@ export default function SplashScreen () {
     const stateSplash = useSelector((state: RootState) => state.splash);
 
     useEffect(() => {
-      console.log(`Splash Screen # ${stateSplash.isSuccess}`);
-      
       if (status === 'success') {
         console.log('Splash Screen # sukses get data user');
-        insertDatabase(data);
+        dispatch(insertDatabase(data));
       }
       if (stateSplash.isSuccess) {
         navigation.navigate('Home');
@@ -33,7 +31,7 @@ export default function SplashScreen () {
           routes: [{ name: 'Home' }]
         });
       }
-    }, [stateSplash.isSuccess, status]);
+    }, [stateSplash.isSuccess, data, status]);
 
     return <View style={styles.container}>
       <Text style={styles.textSplash}>RN Local DB</Text>

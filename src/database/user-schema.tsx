@@ -1,7 +1,7 @@
 export const UserSchema = {
     name: "users",
     properties: {
-        id: "number",
+        id: "int",
         name: "string",
         username: "string",
         email: "string",
