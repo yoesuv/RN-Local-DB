@@ -8,6 +8,7 @@ import { THEME_COLOR } from '../data/colors';
 import UseList from '../services/list-user-service';
 import { RootStackParamList } from './root-stack-params';
 import { RootState } from '../redux/reducers';
+import { insertDatabase } from '../redux/actions';
 
 type splashScreenProp = StackNavigationProp<RootStackParamList, 'Splash'>;
 
@@ -23,6 +24,7 @@ export default function SplashScreen () {
       
       if (status === 'success') {
         console.log('Splash Screen # sukses get data user');
+        insertDatabase(data);
       }
       if (stateSplash.isSuccess) {
         navigation.navigate('Home');
