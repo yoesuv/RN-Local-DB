@@ -2,6 +2,7 @@
 
 #### List Package ####
 - [Axios](https://www.npmjs.com/package/axios)
+- [React Native Gesture Handler](https://www.npmjs.com/package/react-native-gesture-handler)
 - [React Navigation](https://reactnavigation.org/)
 - [React Query](https://tanstack.com/query/v4/docs/react-native)
 - [Realm](https://www.mongodb.com/docs/realm/sdk/react-native/)
