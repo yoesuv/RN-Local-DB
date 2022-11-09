@@ -15,10 +15,8 @@ const homeLoadData: ActionCreator<HomeActionType> = (
 export function loadFromRealm() {
     return async (dispatch: (arg0: HomeActionType) => void) => {
         const dbRealm = await initRealm();
-        const rawUsers = dbRealm.objects("users")
-        console.log(`Home Action # data users`);
-        console.log(rawUsers);
-        dispatch(homeLoadData([]));
+        const rawUsers = dbRealm.objects<UserModel[]>("users")
+        dispatch(homeLoadData(rawUsers));
     }
     
 }

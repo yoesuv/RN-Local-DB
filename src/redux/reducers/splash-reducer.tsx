@@ -4,7 +4,7 @@ interface SplashState {
     isSuccess: boolean,
 }
 
-const initialState = {
+const initialState: SplashState = {
     isSuccess: false,
 }
 
