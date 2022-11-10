@@ -9,3 +9,6 @@
 - [Redux](https://redux.js.org/)
 - [React Redux](https://react-redux.js.org/)
 - [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+
+#### References ####
+- [Youtube](https://www.youtube.com/watch?v=JxN9W9PRlUQ)

@@ -24,10 +24,17 @@ export default function HomeScreen() {
         user: UserModel
     }
 
+    function removeRow(user: UserModel) {
+        console.log(`remove user ${user.name}`);
+    } 
+
     const itemUser = ({user}: TIItemUser)  => {
         return <GestureHandlerRootView>
             <Swipeable
-            renderRightActions={deleteAction}>
+            renderRightActions={viewDeleteAction}
+            onSwipeableOpen={() => {
+                removeRow(user);
+            }}>
                 <View style={styles.itemUser}>
                     <Text style={styles.label}>{user.name}</Text>
                 </View>
@@ -35,7 +42,7 @@ export default function HomeScreen() {
         </GestureHandlerRootView>
     }
 
-    const deleteAction = () => {
+    const viewDeleteAction = () => {
         return <View style={styles.containerDeleteAction}>
             <Text style={styles.labelDelete}>Delete</Text>
         </View>
