@@ -1,15 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StyleSheet, SafeAreaView, Text, View, FlatList } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
 import { RootState } from '../redux/reducers';
 import { loadFromRealm, removeFromRealm } from '../redux/actions';
 import { UserModel } from '../models/user-model';
+import { RootStackParamList } from './root-stack-params';
+
+type homeScreenProp = StackNavigationProp<RootStackParamList, 'Splash'>;
 
 export default function HomeScreen() {
 
+    const navigation = useNavigation<homeScreenProp>();
     const dispatch = useDispatch();
     const stateHome = useSelector((state: RootState) => state.home)
 
@@ -26,18 +32,29 @@ export default function HomeScreen() {
 
     function removeRow(user: UserModel) {
         dispatch(removeFromRealm(user));
-    } 
+    }
+
+    function onItemClick(id: number) {
+        console.log(`Home Screen # item click ${id}`);
+        navigation.navigate('Detail', {
+            id: id,
+        })
+    }
 
     const itemUser = ({user}: TIItemUser)  => {
         return <GestureHandlerRootView>
             <Swipeable
-            renderRightActions={viewDeleteAction}
-            onSwipeableOpen={() => {
-                removeRow(user);
-            }}>
-                <View style={styles.itemUser}>
-                    <Text style={styles.label}>{user.name}</Text>
-                </View>
+                renderRightActions={viewDeleteAction}
+                onSwipeableOpen={() => {
+                    removeRow(user);
+                }}>
+                <TouchableOpacity onPress={() => {
+                    onItemClick(user.id);
+                }}>
+                    <View style={styles.itemUser}>
+                        <Text style={styles.label}>{user.name}</Text>
+                    </View>
+                </TouchableOpacity>
             </Swipeable>
         </GestureHandlerRootView>
     }

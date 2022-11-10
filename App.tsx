@@ -8,6 +8,7 @@ import { RootStackParamList } from './src/screens/root-stack-params';
 import SplashScreen from './src/screens/splash';
 import { THEME_COLOR } from './src/data/colors';
 import HomeScreen from './src/screens/home';
+import DetailScreen from './src/screens/detail';
 import store from './src/redux/store';
 
 const configureStore = store();
@@ -34,6 +35,7 @@ export default function App() {
           <Stack.Navigator>
             <Stack.Screen name='Splash' component={SplashScreen} options={{headerShown: false}} />
             <Stack.Screen name='Home' component={HomeScreen} options={{...baseOptions, title: "Home"}}/>
+            <Stack.Screen name='Detail' component={DetailScreen} options={{...baseOptions, title: "Detail"}}/>
           </Stack.Navigator>
         </NavigationContainer>
       </QueryClientProvider>
