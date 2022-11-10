@@ -11,7 +11,7 @@ import { loadFromRealm, removeFromRealm } from '../redux/actions';
 import { UserModel } from '../models/user-model';
 import { RootStackParamList } from './root-stack-params';
 
-type homeScreenProp = StackNavigationProp<RootStackParamList, 'Splash'>;
+type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 export default function HomeScreen() {
 
