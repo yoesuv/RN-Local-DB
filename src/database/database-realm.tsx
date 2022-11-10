@@ -1,9 +1,9 @@
 import Realm from "realm";
-import { UserSchema } from "./user-schema";
+import { UserModel } from "../models/user-model";
 
 export async function initRealm(): Promise<Realm> {
      return await Realm.open({
         path: "rn_local_db",
-        schema: [ UserSchema ],
+        schema: [ UserModel.schema ],
     })
 }
