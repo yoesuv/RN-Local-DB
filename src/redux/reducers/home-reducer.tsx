@@ -1,5 +1,5 @@
 import { UserModel } from "../../models/user-model";
-import { HomeActionType, HOME_LOAD_DATA } from "../types";
+import { HomeActionType, HOME_LOAD_DATA, HOME_REMOVE_DATA } from "../types";
 
 interface HomeState {
     isSuccess: boolean,
@@ -19,6 +19,13 @@ export function homeReducer(state = initialState, action: HomeActionType): HomeS
                 isSuccess: true,
                 users: action.payload,
             }
+        case HOME_REMOVE_DATA: {
+            return {
+                ...state,
+                isSuccess: true,
+                users: action.payload,
+            }
+        }
         default: 
             return state;
     }

@@ -5,7 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import { RootState } from '../redux/reducers';
-import { loadFromRealm } from '../redux/actions';
+import { loadFromRealm, removeFromRealm } from '../redux/actions';
 import { UserModel } from '../models/user-model';
 
 export default function HomeScreen() {
@@ -25,7 +25,7 @@ export default function HomeScreen() {
     }
 
     function removeRow(user: UserModel) {
-        console.log(`remove user ${user.name}`);
+        dispatch(removeFromRealm(user));
     } 
 
     const itemUser = ({user}: TIItemUser)  => {
