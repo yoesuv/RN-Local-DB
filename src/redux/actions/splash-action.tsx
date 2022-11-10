@@ -16,14 +16,7 @@ export function insertDatabase(users: UserModel[]) {
             dbRealm.deleteAll();
             for (const user of users) {
                 console.log(`Splash Action # insert user ${user.name}`);
-                dbRealm.create("users", {
-                    id: user.id,
-                    name: user.name,
-                    username: user.username,
-                    email: user.email,
-                    phone: user.phone,
-                    website: user.website,
-                })
+                dbRealm.create("users", user);
             }
         })
         dispatch(splashInitDataSuccess());
