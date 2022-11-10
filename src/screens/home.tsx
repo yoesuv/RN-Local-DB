@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StyleSheet, SafeAreaView, Text, View, FlatList, VirtualizedList } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View, FlatList } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
 import { RootState } from '../redux/reducers';
 import { loadFromRealm } from '../redux/actions';
 import { UserModel } from '../models/user-model';
@@ -22,8 +25,19 @@ export default function HomeScreen() {
     }
 
     const itemUser = ({user}: TIItemUser)  => {
-        return <View style={styles.itemUser}>
-            <Text style={styles.label}>{user.name}</Text>
+        return <GestureHandlerRootView>
+            <Swipeable
+            renderRightActions={deleteAction}>
+                <View style={styles.itemUser}>
+                    <Text style={styles.label}>{user.name}</Text>
+                </View>
+            </Swipeable>
+        </GestureHandlerRootView>
+    }
+
+    const deleteAction = () => {
+        return <View style={styles.containerDeleteAction}>
+            <Text style={styles.labelDelete}>Delete</Text>
         </View>
     }
 
@@ -42,6 +56,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     itemUser: {
+        backgroundColor: 'white',
         padding: 12,
         borderBottomColor: '#F5F5F5',
         borderBottomWidth: 1, 
@@ -49,5 +64,17 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         color: 'black',
+    },
+    containerDeleteAction: {
+        backgroundColor: '#F44336',
+        flex: 1,
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingEnd: 20,
+    },
+    labelDelete: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'white',
     }
 })
