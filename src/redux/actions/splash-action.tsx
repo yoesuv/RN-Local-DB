@@ -1,14 +1,7 @@
 import { ActionCreator } from 'redux';
 import { initRealm } from '../../database/database-realm';
-import { UserSchema } from '../../database/user-schema';
 import { UserModel } from '../../models/user-model';
-import { SplashActionType, SPLASH_INIT_DATA_START, SPLASH_INIT_DATA_SUCCESS } from '../types';
-
-const splashInitDataStart: ActionCreator<SplashActionType> = () => {
-    return {
-        type: SPLASH_INIT_DATA_START,
-    }
-}
+import { SplashActionType, SPLASH_INIT_DATA_SUCCESS } from '../types';
 
 const splashInitDataSuccess: ActionCreator<SplashActionType> = () => {
     return {

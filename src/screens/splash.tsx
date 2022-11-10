@@ -31,7 +31,7 @@ export default function SplashScreen () {
           routes: [{ name: 'Home' }]
         });
       }
-    }, [stateSplash.isSuccess, data, status]);
+    }, [status, stateSplash.isSuccess]);
 
     return <View style={styles.container}>
       <Text style={styles.textSplash}>RN Local DB</Text>
