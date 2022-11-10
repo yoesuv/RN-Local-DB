@@ -24,8 +24,8 @@ const homeRemoveData: ActionCreator<HomeActionType> = (
 export function loadFromRealm() {
     return async (dispatch: (arg0: HomeActionType) => void) => {
         const dbRealm = await initRealm();
-        const rawUsers = dbRealm.objects<UserModel[]>("users")
-        dispatch(homeLoadData(rawUsers.toJSON()));
+        const rawUsers = dbRealm.objects<UserModel[]>("users");
+        dispatch(homeLoadData(rawUsers));
     }
 }
 
@@ -33,7 +33,11 @@ export function removeFromRealm(user: UserModel) {
     console.log(`Home Action # remove user ${user.name}`);
     return async (dispatch: (arg0: HomeActionType) => void) => {
         const dbRealm = await initRealm();
-        const results = dbRealm.objects<UserModel[]>("users").toJSON();
+        dbRealm.write(() => {
+            dbRealm.delete(user)
+        });
+        const results = dbRealm.objects<UserModel[]>("users");
+        console.log(`Home Action # remove user length : ${results.length}`);
         dispatch(homeRemoveData(results));
     }
 }
