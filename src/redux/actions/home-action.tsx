@@ -1,4 +1,5 @@
 import { ActionCreator } from "redux";
+import { TB_USERS } from "../../data/constants";
 import { initRealm } from "../../database/database-realm";
 import { UserModel } from "../../models/user-model";
 import { HomeActionType, HOME_LOAD_DATA, HOME_REMOVE_DATA } from "../types";
@@ -24,7 +25,7 @@ const homeRemoveData: ActionCreator<HomeActionType> = (
 export function loadFromRealm() {
     return async (dispatch: (arg0: HomeActionType) => void) => {
         const dbRealm = await initRealm();
-        const rawUsers = dbRealm.objects<UserModel[]>("users");
+        const rawUsers = dbRealm.objects<UserModel[]>(TB_USERS);
         dispatch(homeLoadData(rawUsers));
     }
 }
@@ -36,7 +37,7 @@ export function removeFromRealm(user: UserModel) {
         dbRealm.write(() => {
             dbRealm.delete(user)
         });
-        const results = dbRealm.objects<UserModel[]>("users");
+        const results = dbRealm.objects<UserModel[]>(TB_USERS);
         console.log(`Home Action # remove user length : ${results.length}`);
         dispatch(homeRemoveData(results));
     }

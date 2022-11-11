@@ -1,4 +1,5 @@
 import { ActionCreator } from 'redux';
+import { TB_USERS } from '../../data/constants';
 import { initRealm } from '../../database/database-realm';
 import { UserModel } from '../../models/user-model';
 import { SplashActionType, SPLASH_INIT_DATA_SUCCESS } from '../types';
@@ -16,7 +17,7 @@ export function insertDatabase(users: UserModel[]) {
             dbRealm.deleteAll();
             for (const user of users) {
                 console.log(`Splash Action # insert user ${user.name}`);
-                dbRealm.create("users", user);
+                dbRealm.create(TB_USERS, user);
             }
         })
         dispatch(splashInitDataSuccess());

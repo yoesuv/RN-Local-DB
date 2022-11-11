@@ -1,11 +1,12 @@
 import { AddressModel } from "./address-model";
 import { CompanyModel } from "./company-model";
 import * as Realm from "realm";
+import { TB_COMPANY, TB_USERS } from "../data/constants";
 
 export class UserModel {
 
     public static schema: Realm.ObjectSchema = {
-        name: "users",
+        name: TB_USERS,
         properties: {
             id: "int",
             name: "string",
@@ -13,6 +14,7 @@ export class UserModel {
             email: "string",
             phone: "string",
             website: "string",
+            company: `${TB_COMPANY}?`,
         },
         primaryKey: "id",
     }
@@ -23,4 +25,5 @@ export class UserModel {
     email!:    string;
     phone!:    string;
     website!:  string;
+    company!:  CompanyModel;
 }
