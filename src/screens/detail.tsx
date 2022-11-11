@@ -36,6 +36,34 @@ export default function DetailScreen() {
                 <Text style={styles.label}>Email : </Text>
                 <Text style={styles.value}>{stateDetail.user?.email}</Text>
             </View>
+            {/* User Address */}
+            <Text style={{...styles.label, fontSize: 18}} >Address</Text>
+            <View style={styles.row}>
+                <Text style={styles.label}>Street : </Text>
+                <Text style={styles.value}>{stateDetail.user?.address?.street}</Text>
+            </View>
+            <View style={styles.row}>
+                <Text style={styles.label}>Suite : </Text>
+                <Text style={styles.value}>{stateDetail.user?.address?.suite}</Text>
+            </View>
+            <View style={styles.row}>
+                <Text style={styles.label}>City : </Text>
+                <Text style={styles.value}>{stateDetail.user?.address?.city}</Text>
+            </View>
+            {/* User Company */}
+            <Text style={{...styles.label, fontSize: 18}} >Company</Text>
+            <View style={styles.row}>
+                <Text style={styles.label}>Name : </Text>
+                <Text style={styles.value}>{stateDetail.user?.company?.name}</Text>
+            </View>
+            <View style={styles.row}>
+                <Text style={styles.label}>Catch Phrase : </Text>
+                <Text style={styles.value}>{stateDetail.user?.company?.catchPhrase}</Text>
+            </View>
+            <View style={styles.row}>
+                <Text style={styles.label}>Business : </Text>
+                <Text style={styles.value}>{stateDetail.user?.company?.bs}</Text>
+            </View>
         </View>
     </SafeAreaView>
 }
