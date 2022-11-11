@@ -6,6 +6,7 @@ import { useRoute, RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from './root-stack-params';
 import { loadUser } from '../redux/actions';
 import { RootState } from '../redux/reducers';
+import SizedBox from '../components/sized-box';
 
 export default function DetailScreen() {
 
@@ -36,6 +37,7 @@ export default function DetailScreen() {
                 <Text style={styles.label}>Email : </Text>
                 <Text style={styles.value}>{stateDetail.user?.email}</Text>
             </View>
+            <SizedBox height={20} />
             {/* User Address */}
             <Text style={{...styles.label, fontSize: 18}} >Address</Text>
             <View style={styles.row}>
@@ -50,6 +52,7 @@ export default function DetailScreen() {
                 <Text style={styles.label}>City : </Text>
                 <Text style={styles.value}>{stateDetail.user?.address?.city}</Text>
             </View>
+            <SizedBox height={20} />
             {/* User Company */}
             <Text style={{...styles.label, fontSize: 18}} >Company</Text>
             <View style={styles.row}>
