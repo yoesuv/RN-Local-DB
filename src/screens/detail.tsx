@@ -1,15 +1,22 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { StyleSheet, SafeAreaView, Text, View } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { useRoute, RouteProp } from '@react-navigation/native';
 
 import { RootStackParamList } from './root-stack-params';
-
-type detailScreenProp = StackNavigationProp<RootStackParamList, 'Detail'>;
+import { loadUser } from '../redux/actions';
+import { RootState } from '../redux/reducers';
 
 export default function DetailScreen() {
 
     const route = useRoute<RouteProp<RootStackParamList, 'Detail'>>();
     const params = route.params;
+    const dispatch = useDispatch();
+    const stateDetail = useSelector((state: RootState) => state.detail);
+
+    useEffect(() => {
+        dispatch(loadUser(params.id));
+    }, [])
 
     return <SafeAreaView style={styles.container}>
         <View style={styles.content}>
@@ -19,15 +26,15 @@ export default function DetailScreen() {
             </View>
             <View style={styles.row}>
                 <Text style={styles.label}>Name : </Text>
-                <Text style={styles.value}>{params.id}</Text>
+                <Text style={styles.value}>{stateDetail.user?.name}</Text>
             </View>
             <View style={styles.row}>
                 <Text style={styles.label}>Username : </Text>
-                <Text style={styles.value}>{params.id}</Text>
+                <Text style={styles.value}>{stateDetail.user?.username}</Text>
             </View>
             <View style={styles.row}>
                 <Text style={styles.label}>Email : </Text>
-                <Text style={styles.value}>{params.id}</Text>
+                <Text style={styles.value}>{stateDetail.user?.email}</Text>
             </View>
         </View>
     </SafeAreaView>

@@ -16,7 +16,9 @@ export function loadUser(id: number) {
     return async (dispatch: (arg0: DetailActionType) => void) => {
         const dbRealm = await initRealm();
         const rawUsers = dbRealm.objects<UserModel[]>("users");
-        const selectedUser = rawUsers.filtered(`id = ${id}`);
-        detailLoadData(selectedUser);
+        const selectedUser = rawUsers.filtered(`id = ${id}`)[0];
+        console.log('load user id', id);
+        console.log(selectedUser);
+        dispatch(detailLoadData(selectedUser));
     }
 }

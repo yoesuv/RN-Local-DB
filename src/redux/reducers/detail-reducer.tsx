@@ -14,7 +14,7 @@ export function detailReducer(state = initialState, action: DetailActionType): D
         case DETAIL_LOAD_DATA:
             return {
                 ...state,
-                user: null,
+                user: action.user,
             }
         default: 
             return state;
