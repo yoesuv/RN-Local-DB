@@ -1,4 +1,4 @@
-import { TB_ADDRESS } from "../data/constants";
+import { TB_ADDRESS, TB_GEO } from "../data/constants";
 import { GeoModel } from "./geo-model";
 
 export class AddressModel {
@@ -11,12 +11,13 @@ export class AddressModel {
             suite: "string",
             city: "string",
             zipcode: "string",
+            geo: `${TB_GEO}?`,
         },
     }
 
-    street!:  string;
-    suite!:   string;
-    city!:    string;
-    zipcode!: string;
-    //geo:     GeoModel;
+    street?:  string;
+    suite?:   string;
+    city?:    string;
+    zipcode?: string;
+    geo?:     GeoModel;
 }
