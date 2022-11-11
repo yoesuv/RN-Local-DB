@@ -18,20 +18,29 @@ export default function HomeScreen() {
     const navigation = useNavigation<homeScreenProp>();
     const dispatch = useDispatch();
     const stateHome = useSelector((state: RootState) => state.home)
+    let row: Array<any> = [];
+    let prevOpenedRow: Swipeable;
 
     useEffect(() => {
         dispatch(loadFromRealm());
         if (stateHome.isSuccess) {
-            console.log(stateHome.users.length);
+            console.log("Home Screen # list count : ", stateHome.users.length);
         }
     },[stateHome.isSuccess])
 
     interface TIItemUser {
-        user: UserModel
+        index: number;
+        user: UserModel;
     }
 
-    function removeRow(user: UserModel) {
+    function removeRow(index: number, user: UserModel) {
+        console.log("Home Screen # remove row index", index);
+        console.log("Home Screen # remove user", user);
         dispatch(removeFromRealm(user));
+        if (prevOpenedRow && prevOpenedRow !== row[index]) {
+            prevOpenedRow.close();
+        }
+        prevOpenedRow = row[index];
     }
 
     function onItemClick(id: number) {
@@ -41,13 +50,14 @@ export default function HomeScreen() {
         })
     }
 
-    const itemUser = ({user}: TIItemUser)  => {
+    const itemUser = ({index, user}: TIItemUser)  => {
         return <GestureHandlerRootView>
             <Swipeable
                 renderRightActions={viewDeleteAction}
                 onSwipeableOpen={() => {
-                    removeRow(user);
-                }}>
+                    removeRow(index, user);
+                }}
+                ref={(ref) => (row[index] = ref)}>
                 <TouchableOpacity onPress={() => {
                     onItemClick(user.id);
                 }}>
@@ -68,8 +78,8 @@ export default function HomeScreen() {
     return <SafeAreaView style={styles.container}>
         <FlatList 
             data={stateHome.users}
-            renderItem={({item}) => itemUser({user: item}) } 
-            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item, index}) => itemUser({index: index, user: item}) } 
+            keyExtractor={(item) => item.id.toString()}
         />
     </SafeAreaView>
 }
