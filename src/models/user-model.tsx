@@ -1,7 +1,7 @@
 import { AddressModel } from "./address-model";
 import { CompanyModel } from "./company-model";
 import * as Realm from "realm";
-import { TB_COMPANY, TB_USERS } from "../data/constants";
+import { TB_ADDRESS, TB_COMPANY, TB_USERS } from "../data/constants";
 
 export class UserModel {
 
@@ -12,6 +12,7 @@ export class UserModel {
             name: "string",
             username: "string",
             email: "string",
+            address: `${TB_ADDRESS}?`,
             phone: "string",
             website: "string",
             company: `${TB_COMPANY}?`,
@@ -23,6 +24,7 @@ export class UserModel {
     name!:     string;
     username!: string;
     email!:    string;
+    address!:  AddressModel;
     phone!:    string;
     website!:  string;
     company!:  CompanyModel;
