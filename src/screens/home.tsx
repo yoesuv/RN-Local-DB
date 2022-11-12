@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StyleSheet, SafeAreaView, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View, FlatList, Pressable } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -10,6 +10,7 @@ import { RootState } from '../redux/reducers';
 import { loadFromRealm, removeFromRealm } from '../redux/actions';
 import { UserModel } from '../models/user-model';
 import { RootStackParamList } from './root-stack-params';
+import { THEME_COLOR } from '../data/colors';
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -58,13 +59,17 @@ export default function HomeScreen() {
                     removeRow(index, user);
                 }}
                 ref={(ref) => (row[index] = ref)}>
-                <TouchableOpacity onPress={() => {
+                <Pressable onPress={() => {
                     onItemClick(user.id);
                 }}>
+                {({ pressed }) => (
                     <View style={styles.itemUser}>
-                        <Text style={styles.label}>{user.name}</Text>
+                        <Text style={pressed ? styles.labelPressed : styles.label}>
+                            {user.name}
+                        </Text>
                     </View>
-                </TouchableOpacity>
+                )}
+                </Pressable>
             </Swipeable>
         </GestureHandlerRootView>
     }
@@ -98,6 +103,10 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         color: 'black',
+    },
+    labelPressed: {
+        fontSize: 16,
+        color: THEME_COLOR,
     },
     containerDeleteAction: {
         backgroundColor: '#F44336',
