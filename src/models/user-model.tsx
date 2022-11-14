@@ -1,6 +1,5 @@
 import { AddressModel } from "./address-model";
 import { CompanyModel } from "./company-model";
-import * as Realm from "realm";
 import { TB_ADDRESS, TB_COMPANY, TB_USERS } from "../data/constants";
 
 export class UserModel {

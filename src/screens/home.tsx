@@ -5,6 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { FlashList } from "@shopify/flash-list";
 
 import { RootState } from '../redux/reducers';
 import { loadFromRealm, removeFromRealm } from '../redux/actions';
@@ -81,10 +82,11 @@ export default function HomeScreen() {
     }
 
     return <SafeAreaView style={styles.container}>
-        <FlatList 
+        <FlashList 
             data={stateHome.users}
             renderItem={({item, index}) => itemUser({index: index, user: item}) } 
             keyExtractor={(item) => item.id.toString()}
+            estimatedItemSize={10}
         />
     </SafeAreaView>
 }
