@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StyleSheet, SafeAreaView, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View, ToastAndroid } from 'react-native';
 import { useRoute, RouteProp } from '@react-navigation/native';
 
 import { RootStackParamList } from './root-stack-params';
@@ -17,7 +17,10 @@ export default function DetailScreen() {
 
     useEffect(() => {
         dispatch(loadUser(params.id));
-    }, [])
+        if (!stateDetail.isLoadSuccess) {
+            ToastAndroid.show("Failed Load Detail User", ToastAndroid.SHORT);
+        }
+    }, [stateDetail.isLoadSuccess])
 
     return <SafeAreaView style={styles.container}>
         <View style={styles.content}>
