@@ -1,20 +1,15 @@
-import { SPLASH_INIT_DATA_START, SPLASH_INIT_DATA_SUCCESS } from "../types";
+import { SplashActionType, SPLASH_INIT_DATA_SUCCESS } from "../types";
 
-interface Splash {
-    type: string,
+interface SplashState {
+    isSuccess: boolean,
 }
 
-const initialState = {
+const initialState: SplashState = {
     isSuccess: false,
 }
 
-export function splashReducer(state = initialState, action: Splash) {
+export function splashReducer(state = initialState, action: SplashActionType): SplashState {
     switch (action.type) {
-        case SPLASH_INIT_DATA_START: 
-            return {
-                ...state,
-                isSuccess: false,
-            };
         case SPLASH_INIT_DATA_SUCCESS: 
             return {
                 ...state,

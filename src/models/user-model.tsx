@@ -1,40 +1,30 @@
-export interface UserModel {
-    id:       number;
-    name:     string;
-    username: string;
-    email:    string;
-    address:  Address;
-    phone:    string;
-    website:  string;
-    company:  Company;
-}
+import { AddressModel } from "./address-model";
+import { CompanyModel } from "./company-model";
+import { TB_ADDRESS, TB_COMPANY, TB_USERS } from "../data/constants";
 
-export interface Address {
-    street:  string;
-    suite:   string;
-    city:    string;
-    zipcode: string;
-    geo:     Geo;
-}
+export class UserModel {
 
-export interface Geo {
-    lat: string;
-    lng: string;
-}
-
-export interface Company {
-    name:        string;
-    catchPhrase: string;
-    bs:          string;
-}
-
-// Converts JSON strings to/from your types
-export class Convert {
-    public static toUserModel(json: string): UserModel {
-        return JSON.parse(json);
+    public static schema: Realm.ObjectSchema = {
+        name: TB_USERS,
+        properties: {
+            id: "int",
+            name: "string",
+            username: "string",
+            email: "string",
+            address: `${TB_ADDRESS}?`,
+            phone: "string",
+            website: "string",
+            company: `${TB_COMPANY}?`,
+        },
+        primaryKey: "id",
     }
 
-    public static userModelToJson(value: UserModel): string {
-        return JSON.stringify(value);
-    }
+    id!:       number;
+    name!:     string;
+    username!: string;
+    email!:    string;
+    address!:  AddressModel;
+    phone!:    string;
+    website!:  string;
+    company!:  CompanyModel;
 }
